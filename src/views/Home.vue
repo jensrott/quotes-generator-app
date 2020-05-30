@@ -11,43 +11,39 @@
       <Spinner />
     </div>
     <p class="home__error" v-if="error">{{error}}</p>
-    <QuotesList v-bind:quotes="quotes" />
+    <QuotesList v-bind:quotes="allQuotes" />
   </div>
 </template>
 
 <script>
 import QuotesList from "@/components/QuotesList.vue";
 import Spinner from "@/components/Spinner.vue";
-import API from "../API";
+import quotesTypes from "@/store/modules/quotes/types";
 
 export default {
   name: "Home",
 
   data() {
     return {
-      quotes: [],
-      searchTerm: "",
-      error: "",
-      loading: false
+      searchTerm: ""
     };
+  },
+
+  computed: {
+    allQuotes() {
+      return this.$store.getters["allQuotes"];
+    },
+    loading() {
+      return this.$store.getters["loading"];
+    },
+    error() {
+      return this.$store.getters["error"];
+    }
   },
 
   methods: {
     getQuotes() {
-      this.loading = true;
-      this.quotes = [];
-      API.search(this.searchTerm)
-        .then(quotes => {
-          if (quotes.length !== 0) {
-            this.quotes = quotes;
-            this.loading = false;
-          }
-          this.loading = false;
-        })
-        .catch(err => {
-          this.error = err;
-          this.loading = false;
-        });
+      this.$store.dispatch(quotesTypes.FETCH_QUOTES, this.searchTerm);
     }
   },
 

@@ -1,0 +1,11 @@
+export default {
+    // Mutations
+    SET_QUOTES: 'SET_QUOTES',
+    SET_RANDOM_QUOTE: 'SET_RANDOM_QUOTE',
+    SET_LOADING: 'SET_LOADING',
+    SET_ERROR: 'SET_ERROR',
+
+    // Actions
+    FETCH_QUOTES: 'FETCH_QUOTES',
+    FETCH_RANDOM_QUOTE: 'FETCH_RANDOM_QUOTE'
+}

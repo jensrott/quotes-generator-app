@@ -2,14 +2,14 @@
   <div class="quote">
     <v-card class="mx-auto mb-3" max-width="344">
       <v-card-text>
-        <p>{{quote.quoteText}}</p>
+        <p v-if="quote.quoteText">{{quote.quoteText}}</p>
       </v-card-text>
       <v-card-title>
         <router-link
+          v-if="quote.quoteAuthor"
           class="quote__author-link"
           :to="`/author/${quote.quoteAuthor}`"
         >{{quote.quoteAuthor}}</router-link>
-        <!-- <p>{{quote.quoteGenre}}</p> -->
       </v-card-title>
     </v-card>
   </div>

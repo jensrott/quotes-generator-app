@@ -1,6 +1,7 @@
 <template>
   <div class="random-quote">
-    <Quote class="random-quote__animation" v-bind:quote="quote" />
+    <Quote class="random-quote__animation" v-bind:quote="randomQuote" />
+    <!-- {{randomQuote}} -->
     <div class="random-quote__btn-container">
       <v-btn @click="getRandomQuote()" color="primary">Reload</v-btn>
     </div>
@@ -14,7 +15,7 @@
 <script>
 import Quote from "@/components/Quote";
 import Spinner from "@/components/Spinner";
-import API from "../API";
+import quotesTypes from "@/store/modules/quotes/types";
 
 export default {
   name: "RandomQuote",
@@ -23,30 +24,25 @@ export default {
     Spinner
   },
 
-  mounted() {
-    this.getRandomQuote();
+  computed: {
+    randomQuote() {
+      return this.$store.getters["randomQuote"];
+    },
+    loading() {
+      return this.$store.getters["loading"];
+    },
+    error() {
+      return this.$store.getters["error"];
+    }
   },
 
-  data() {
-    return {
-      quote: {},
-      error: "",
-      loading: false
-    };
+  created() {
+    this.getRandomQuote();
   },
 
   methods: {
     getRandomQuote() {
-      this.loading = true;
-      API.getRandomQuote()
-        .then(quote => {
-          this.quote = quote;
-          this.loading = false;
-        })
-        .catch(err => {
-          this.error = err;
-          this.loading = false;
-        });
+      this.$store.dispatch(quotesTypes.FETCH_RANDOM_QUOTE);
     }
   }
 };

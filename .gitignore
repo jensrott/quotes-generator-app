@@ -21,6 +21,9 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
-todos.md 
+todos.md
 deploy_client.sh
 push_repo.sh
+
+# Local Netlify folder
+.netlify

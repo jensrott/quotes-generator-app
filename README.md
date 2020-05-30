@@ -31,11 +31,17 @@ npm run serve
 * Search quotes
 * View all quotes from specific author
 * View random quote
+* Uses Vuex to have a centralized data store
+* Unit tests
 
 ## Features for later versions
 
-* Use Vuex
-* Write unit tests
+* Use Vuex [V]
+* Write Unit Tests [V]
+* Write more detailed unit tests
+* Use Vue-hooks 
+* Use Composition API
 * Dropdown list api results when typing
 * Change theme colors based on the season
 * Dark mode
+* Pagination

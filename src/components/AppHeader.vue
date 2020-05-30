@@ -41,8 +41,23 @@ export default {
 
   &__title {
     color: #fff;
+    transition: all 300ms ease-in-out;
+    animation: scaling 300ms ease-in-out;
     @media only screen and (max-width: 768px) {
       display: none;
+    }
+
+    &:hover {
+      color: #272727;
+    }
+  }
+
+  @keyframes scaling {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 }

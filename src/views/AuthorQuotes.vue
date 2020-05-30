@@ -1,6 +1,6 @@
 <template>
   <div class="author-quotes">
-    <QuotesList v-bind:quotes="quotes" />
+    <QuotesList v-bind:quotes="allQuotes" />
     <div v-if="loading">
       <Spinner />
     </div>
@@ -9,19 +9,23 @@
 </template>
 
 <script>
-import API from "../API";
 import QuotesList from "@/components/QuotesList";
 import Spinner from "@/components/Spinner";
+import quotesTypes from "@/store/modules/quotes/types";
 
 export default {
   name: "AuthorQuotes",
 
-  data() {
-    return {
-      quotes: [],
-      error: "",
-      loading: false
-    };
+  computed: {
+    allQuotes() {
+      return this.$store.getters["allQuotes"];
+    },
+    loading() {
+      return this.$store.getters["loading"];
+    },
+    error() {
+      return this.$store.getters["error"];
+    }
   },
 
   components: {
@@ -29,23 +33,14 @@ export default {
     Spinner
   },
 
-  mounted() {
+  created() {
     this.getAuthorQuotes();
   },
 
   methods: {
     getAuthorQuotes() {
       const authorName = this.$route.params.authorName;
-      this.loading = true;
-      API.search(authorName)
-        .then(quotes => {
-          this.quotes = quotes;
-          this.loading = false;
-        })
-        .catch(err => {
-          this.error = err;
-          this.loading = false;
-        });
+      this.$store.dispatch(quotesTypes.FETCH_QUOTES, authorName);
     }
   }
 };

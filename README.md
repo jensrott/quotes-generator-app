@@ -2,8 +2,10 @@
 
 ## About
 
-Quotes generator app which use following [API](https://pprathameshmore.github.io/QuoteGarden/).
+Quotes generator app which uses following [API](https://pprathameshmore.github.io/QuoteGarden/).
 I created this to sharpen my Vue skills.
+
+![Quotes Generator - Animated gif demo](demo/demo.gif)
 
 ## Installation and setup
 
